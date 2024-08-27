@@ -11,9 +11,9 @@ import { useForm } from 'react-hook-form';
 export const SignUpForm = () => {
 	const form = useForm({
 		defaultValues: {
+			name: '',
 			email: '',
 			password: '',
-			confirmPassword: '',
 		},
 	});
 
@@ -27,18 +27,12 @@ export const SignUpForm = () => {
 		>
 			<h1 className='text-theme-gray-900 text-preset-1'>Sign Up</h1>
 			<section className='grid gap-4'>
-				<FormInput
-					input={Input}
-					name='email'
-					label='Email'
-					type='email'
-					autoFocus
-				/>
-				<FormInput input={PasswordInput} name='password' label='Password' />
+				<FormInput input={Input} name='name' label='Name' autoFocus />
+				<FormInput input={Input} name='email' label='Email' type='email' />
 				<FormInput
 					input={PasswordInput}
-					name='confirmPassword'
-					label='Confirm Password'
+					name='password'
+					label='Create Password'
 					description='Passwords must be at least 8 characters'
 				/>
 			</section>
