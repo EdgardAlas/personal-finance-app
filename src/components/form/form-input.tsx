@@ -50,7 +50,8 @@ export const FormInput = <T, E extends React.ElementType>({
 							className={cn(
 								className,
 								{
-									'border-theme-red': fieldState.error,
+									'border-theme-red focus-visible:ring-1 focus-visible:ring-theme-red':
+										fieldState.error,
 								},
 								classNames?.input
 							)}
