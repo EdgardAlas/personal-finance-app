@@ -39,7 +39,7 @@ export const FormInput = <T, E extends React.ElementType>({
 			control={form.control}
 			name={name as string}
 			render={({ field, fieldState }) => (
-				<FormItem>
+				<FormItem className={cn(classNames?.container)}>
 					<FormLabel className={cn('fz-preset-5-bold', classNames?.label)}>
 						{label}
 					</FormLabel>
