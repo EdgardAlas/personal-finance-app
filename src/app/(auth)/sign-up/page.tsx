@@ -1,4 +1,4 @@
-import { LoginForm } from './_containers/login-form';
+import { SignUpForm } from './_containers/sign-up-form';
 
 export const metadata = {
 	title: 'Personal Finance App',
@@ -6,8 +6,8 @@ export const metadata = {
 		'Personal finance app puts you in control of your spending. Track transactions, set budgets, and add to savings pots easily.',
 };
 
-const LoginPage = () => {
-	return <LoginForm />;
+const SignUpPage = () => {
+	return <SignUpForm />;
 };
 
-export default LoginPage;
+export default SignUpPage;

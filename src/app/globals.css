@@ -64,6 +64,34 @@
 		@apply border-border;
 	}
 	body {
-		@apply bg-background text-foreground;
+		@apply text-theme-gray-500 bg-background;
+	}
+
+	.text-preset-1 {
+		@apply text-[2rem] font-bold leading-[120%] tracking-[0px];
+	}
+
+	.text-preset-2 {
+		@apply text-[1.25rem] font-bold leading-[120%] tracking-[0px];
+	}
+
+	.text-preset-3 {
+		@apply text-[1rem] font-bold leading-[150%] tracking-[0px];
+	}
+
+	.text-preset-4 {
+		@apply text-[0.875rem] font-normal leading-[150%] tracking-[0px];
+	}
+
+	.text-preset-4-bold {
+		@apply text-[0.875rem] font-bold leading-[150%] tracking-[0px];
+	}
+
+	.text-preset-5 {
+		@apply text-[0.75rem] font-normal leading-[150%] tracking-[0px];
+	}
+
+	.text-preset-5-bold {
+		@apply text-[0.75rem] font-bold leading-[150%] tracking-[0px];
 	}
 }
