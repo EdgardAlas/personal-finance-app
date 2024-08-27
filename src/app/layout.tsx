@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className={cn(fontFamily.className, 'text-preset-4 bg-background')}>
+			<body className={cn(fontFamily.className, 'fz-preset-4 bg-background')}>
 				{children}
 			</body>
 		</html>

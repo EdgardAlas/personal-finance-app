@@ -45,7 +45,7 @@
 		--muted-foreground: 25 5.3% 44.7%;
 		--accent: 60 4.8% 95.9%;
 		--accent-foreground: var(--theme-gray-900);
-		--destructive: 0 84.2% 60.2%;
+		--destructive: var(--theme-red);
 		--destructive-foreground: var(--theme-white);
 		--border: var(--theme-gray-300);
 		--input: var(--theme-gray-300);
@@ -64,34 +64,34 @@
 		@apply border-border;
 	}
 	body {
-		@apply text-theme-gray-500 bg-background;
+		@apply bg-background text-theme-gray-500;
 	}
 
-	.text-preset-1 {
+	.fz-preset-1 {
 		@apply text-[2rem] font-bold leading-[120%] tracking-[0px];
 	}
 
-	.text-preset-2 {
+	.fz-preset-2 {
 		@apply text-[1.25rem] font-bold leading-[120%] tracking-[0px];
 	}
 
-	.text-preset-3 {
+	.fz-preset-3 {
 		@apply text-[1rem] font-bold leading-[150%] tracking-[0px];
 	}
 
-	.text-preset-4 {
+	.fz-preset-4 {
 		@apply text-[0.875rem] font-normal leading-[150%] tracking-[0px];
 	}
 
-	.text-preset-4-bold {
+	.fz-preset-4-bold {
 		@apply text-[0.875rem] font-bold leading-[150%] tracking-[0px];
 	}
 
-	.text-preset-5 {
+	.fz-preset-5 {
 		@apply text-[0.75rem] font-normal leading-[150%] tracking-[0px];
 	}
 
-	.text-preset-5-bold {
+	.fz-preset-5-bold {
 		@apply text-[0.75rem] font-bold leading-[150%] tracking-[0px];
 	}
 }

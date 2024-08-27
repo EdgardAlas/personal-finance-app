@@ -11,11 +11,11 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 					}}
 				>
 					<Logo className='absolute left-[2.5rem] top-[2.5rem]' />
-					<section className='text-theme-white absolute bottom-[2.5rem] left-0 grid gap-6 px-[2.5rem]'>
-						<h2 className='text-preset-1'>
+					<section className='absolute bottom-[2.5rem] left-0 grid gap-6 px-[2.5rem] text-theme-white'>
+						<h2 className='fz-preset-1'>
 							Keep track of your money and save your future
 						</h2>
-						<p className='text-preset-4'>
+						<p className='fz-preset-4'>
 							Personal finance app puts you in control of your spending. Track
 							transactions, set budgets, and add to savings pots easily.
 						</p>
@@ -24,7 +24,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 			</section>
 
 			<section className='flex flex-1 flex-col items-center justify-center lg:flex-row'>
-				<section className='bg-theme-gray-900 grid h-[4.375rem] w-full place-content-center rounded-b-[0.75rem] lg:hidden'>
+				<section className='grid h-[4.375rem] w-full place-content-center rounded-b-[0.75rem] bg-theme-gray-900 lg:hidden'>
 					<Logo />
 				</section>
 

@@ -1,25 +1,36 @@
 'use client';
 
+import {
+	LoginFormValues,
+	loginValidations,
+} from '@/app/(auth)/login/validations';
 import { FormContext } from '@/components/form/form-context';
 import { FormInput } from '@/components/form/form-input';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
+import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
 export const LoginForm = () => {
-	const form = useForm();
+	const form = useForm<LoginFormValues>({
+		defaultValues: {
+			email: '',
+			password: '',
+		},
+		resolver: zodResolver(loginValidations),
+	});
 
 	return (
 		<FormContext
-			className='bg-theme-white grid flex-1 gap-8 rounded-[0.75rem] p-5 md:max-w-[35rem] md:p-8'
+			className='grid flex-1 gap-8 rounded-[0.75rem] bg-theme-white p-5 md:max-w-[35rem] md:p-8'
 			form={form}
 			onSubmit={async (data) => {
 				await new Promise((resolve) => setTimeout(() => resolve(data), 1000));
 			}}
 		>
-			<h1 className='text-theme-gray-900 text-preset-1'>Login</h1>
+			<h1 className='fz-preset-1 text-theme-gray-900'>Login</h1>
 			<section className='grid gap-4'>
 				<FormInput
 					input={Input}
@@ -35,7 +46,7 @@ export const LoginForm = () => {
 				Need to create an account?{' '}
 				<Link
 					href='/sign-up'
-					className='text-theme-gray-900 font-bold underline'
+					className='font-bold text-theme-gray-900 underline'
 				>
 					Sign up
 				</Link>
