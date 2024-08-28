@@ -17,7 +17,7 @@ export const handleSafeActionResponse = async ({
 }) => {
 	if (!action) {
 		toast.error('An error occurred. Please try again later.');
-		return;
+		return false;
 	}
 
 	const id = toast.loading(loadingMessage);
@@ -30,8 +30,10 @@ export const handleSafeActionResponse = async ({
 			errorMessage,
 		})
 	) {
-		return;
+		return false;
 	}
 
 	toast.success(successMessage, { id });
+
+	return true;
 };

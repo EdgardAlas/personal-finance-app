@@ -1,5 +1,6 @@
 'use client';
 
+import { resetPasswordAction } from '@/app/(auth)/reset-password/actions';
 import {
 	ResetPasswordFormValues,
 	resetPasswordValidations,
@@ -9,11 +10,10 @@ import { FormInput } from '@/components/form/form-input';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
-import { wait } from '@/helpers/wait';
+import { handleSafeActionResponse } from '@/lib/handle-safe-action-response';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 
 export const ResetPasswordForm = ({
 	email,
@@ -76,19 +76,18 @@ const useResetPasswordForm = ({
 		defaultValues: {
 			password: '',
 			confirmPassword: '',
+			email,
+			token,
 		},
 		resolver: zodResolver(resetPasswordValidations),
 	});
 
 	const onSubmit = async (data: ResetPasswordFormValues) => {
-		const id = toast.loading('Resetting password...');
-
-		await wait(1000, {
-			...data,
-			email,
-			token,
+		await handleSafeActionResponse({
+			action: resetPasswordAction(data),
+			loadingMessage: 'Resetting password...',
+			successMessage: 'Password reset successfully',
 		});
-		toast.success('Password reset!', { id });
 	};
 
 	return { form, onSubmit };

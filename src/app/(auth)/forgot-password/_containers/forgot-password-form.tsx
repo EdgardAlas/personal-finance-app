@@ -1,20 +1,20 @@
 'use client';
 
+import { sendResetLink } from '@/app/(auth)/forgot-password/actions';
+import { FormContext } from '@/components/form/form-context';
+import { FormInput } from '@/components/form/form-input';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { handleSafeActionResponse } from '@/lib/handle-safe-action-response';
+import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { LinkSent } from '../_containers/link-sent';
 import {
 	ForgotPasswordFormValues,
 	forgotPasswordValidations,
 } from '../validations';
-import { FormContext } from '@/components/form/form-context';
-import { FormInput } from '@/components/form/form-input';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { wait } from '@/helpers/wait';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 
 export const ForgotPasswordForm = () => {
 	const { form, onSubmit, isLinkSent } = useForgotPasswordForm();
@@ -51,10 +51,15 @@ const useForgotPasswordForm = () => {
 	});
 
 	const onSubmit = async (data: ForgotPasswordFormValues) => {
-		const id = toast.loading('Sending reset link...');
-		await wait(1000, data);
-		setIsLinkSent(true);
-		toast.success('Reset link sent', { id });
+		if (
+			await handleSafeActionResponse({
+				action: sendResetLink(data),
+				loadingMessage: 'Sending reset link...',
+				successMessage: 'Reset link sent!',
+			})
+		) {
+			setIsLinkSent(true);
+		}
 	};
 
 	return { form, onSubmit, isLinkSent };

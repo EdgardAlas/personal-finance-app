@@ -16,6 +16,7 @@ export const users = pgTable(
 		password: text('password').notNull(),
 		name: text('name').notNull(),
 		timezone: text('timezone').default('UTC').notNull(),
+		resetPasswordToken: text('reset_password_token'),
 		createdAt: timestamp('created_at', {
 			withTimezone: true,
 			mode: 'string',
