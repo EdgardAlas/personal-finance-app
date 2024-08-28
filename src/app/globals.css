@@ -94,4 +94,8 @@
 	.fz-preset-5-bold {
 		@apply text-[0.75rem] font-bold leading-[150%] tracking-[0px];
 	}
+
+	.auth-container {
+		@apply grid flex-1 gap-8 rounded-[0.75rem] bg-theme-white p-5 md:max-w-[35rem] md:p-8;
+	}
 }

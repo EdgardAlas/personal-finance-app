@@ -18,11 +18,7 @@ export const SignUpForm = () => {
 	const { form, onSubmit } = useSignUpForm();
 
 	return (
-		<FormContext
-			className='grid flex-1 gap-8 rounded-[0.75rem] bg-theme-white p-5 md:max-w-[35rem] md:p-8'
-			form={form}
-			onSubmit={onSubmit}
-		>
+		<FormContext className='auth-container' form={form} onSubmit={onSubmit}>
 			<h1 className='fz-preset-1 text-theme-gray-900'>Sign Up</h1>
 			<section className='grid gap-4'>
 				<FormInput input={Input} name='name' label='Name' autoFocus />
@@ -34,7 +30,7 @@ export const SignUpForm = () => {
 					description='Passwords must be at least 8 characters'
 				/>
 			</section>
-			<Button loading={form.formState.isSubmitting}>Login</Button>
+			<Button loading={form.formState.isSubmitting}>Sign Up</Button>
 			<p className='text-center'>
 				Already have an account?{' '}
 				<Link href='/login' className='font-bold text-theme-gray-900 underline'>

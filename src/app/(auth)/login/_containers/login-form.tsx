@@ -19,11 +19,7 @@ export const LoginForm = () => {
 	const { form, onSubmit } = useLoginForm();
 
 	return (
-		<FormContext
-			className='grid flex-1 gap-8 rounded-[0.75rem] bg-theme-white p-5 md:max-w-[35rem] md:p-8'
-			form={form}
-			onSubmit={onSubmit}
-		>
+		<FormContext className='auth-container' form={form} onSubmit={onSubmit}>
 			<h1 className='fz-preset-1 text-theme-gray-900'>Login</h1>
 			<section className='grid gap-4'>
 				<FormInput

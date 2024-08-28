@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Public_Sans } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/cn';
+import { Toaster } from '@/components/ui/sonner';
 
 const fontFamily = Public_Sans({
 	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -22,6 +23,7 @@ export default function RootLayout({
 		<html lang='en'>
 			<body className={cn(fontFamily.className, 'fz-preset-4 bg-background')}>
 				{children}
+				<Toaster />
 			</body>
 		</html>
 	);

@@ -24,11 +24,7 @@ export const ResetPasswordForm = ({
 	const { form, onSubmit } = useResetPasswordForm({ email, token });
 
 	return (
-		<FormContext
-			className='grid flex-1 gap-8 rounded-[0.75rem] bg-theme-white p-5 md:max-w-[35rem] md:p-8'
-			form={form}
-			onSubmit={onSubmit}
-		>
+		<FormContext className='auth-container' form={form} onSubmit={onSubmit}>
 			<h1 className='fz-preset-1 text-theme-gray-900'>Reset Password</h1>
 			<section className='grid gap-4'>
 				<Input name='email' readOnly value={email} />
