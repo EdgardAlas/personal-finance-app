@@ -1,5 +1,6 @@
 'use client';
 
+import { loginAction } from '@/app/(auth)/login/actions';
 import {
 	LoginFormValues,
 	loginValidations,
@@ -10,11 +11,10 @@ import { Button } from '@/components/ui/button';
 import { FormLabel } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
-import { wait } from '@/helpers/wait';
+import { handleSafeActionResponse } from '@/lib/handle-safe-action-response';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 
 export const LoginForm = () => {
 	const { form, onSubmit } = useLoginForm();
@@ -70,9 +70,11 @@ const useLoginForm = () => {
 	});
 
 	const onSubmit = async (data: LoginFormValues) => {
-		const id = toast.loading('Logging in...');
-		await wait(1000, data);
-		toast.success('Welcome! You are now logged in.', { id });
+		await handleSafeActionResponse({
+			action: loginAction(data),
+			successMessage: 'Logged in successfully',
+			loadingMessage: 'Logging in...',
+		});
 	};
 
 	return { form, onSubmit };
