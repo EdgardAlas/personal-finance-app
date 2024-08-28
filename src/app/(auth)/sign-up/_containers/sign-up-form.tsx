@@ -1,5 +1,6 @@
 'use client';
 
+import { signUpAction } from '@/app/(auth)/sign-up/acionts';
 import {
 	SignUpFormValues,
 	signUpValidations,
@@ -9,11 +10,10 @@ import { FormInput } from '@/components/form/form-input';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
-import { wait } from '@/helpers/wait';
+import { handleSafeActionResponse } from '@/lib/handle-safe-action-response';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 
 export const SignUpForm = () => {
 	const { form, onSubmit } = useSignUpForm();
@@ -53,9 +53,11 @@ const useSignUpForm = () => {
 	});
 
 	const onSubmit = async (data: SignUpFormValues) => {
-		const id = toast.loading('Signing up...');
-		await wait(1000, data);
-		toast.success('Welcome! You are now signed up.', { id });
+		await handleSafeActionResponse({
+			action: signUpAction(data),
+			successMessage: 'Welcome! You are now signed up.',
+			loadingMessage: 'Signing up...',
+		});
 	};
 
 	return { form, onSubmit };

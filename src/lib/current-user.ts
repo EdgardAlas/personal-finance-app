@@ -2,6 +2,7 @@ import { auth } from '@/lib/auth';
 import { checkIfUserExistsById } from '@/use-cases/check-if-user-exists';
 
 interface User {
+	id: string;
 	name: string;
 	email: string;
 	timezone: string;
@@ -26,6 +27,7 @@ export const currentUser = async (): Promise<User | undefined> => {
 	}
 
 	return {
+		id: user.id,
 		name: user.name,
 		email: user.email,
 		timezone: user.timezone,

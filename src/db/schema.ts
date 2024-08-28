@@ -6,7 +6,7 @@ import {
 	text,
 	timestamp,
 } from 'drizzle-orm/pg-core';
-import { sql } from 'drizzle-orm';
+import { InferInsertModel, InferSelectModel, sql } from 'drizzle-orm';
 
 export const users = pgTable(
 	'users',
@@ -35,3 +35,6 @@ export const users = pgTable(
 		};
 	}
 );
+
+export type NewUser = InferInsertModel<typeof users>;
+export type SelectUser = InferSelectModel<typeof users>;

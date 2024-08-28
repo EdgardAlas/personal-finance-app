@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const signUpValidations = z.object({
-	name: z.string().min(1, { message: 'Name is required' }),
+	name: z.string().min(5, { message: 'Name must be at least 5 characters' }),
 	email: z
 		.string()
 		.min(1, { message: 'Email is required' })
