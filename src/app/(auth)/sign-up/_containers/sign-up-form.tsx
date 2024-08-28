@@ -1,6 +1,6 @@
 'use client';
 
-import { signUpAction } from '@/app/(auth)/sign-up/acionts';
+import { signUpAction } from '@/app/(auth)/sign-up/actions';
 import {
 	SignUpFormValues,
 	signUpValidations,
@@ -48,6 +48,7 @@ const useSignUpForm = () => {
 			name: '',
 			email: '',
 			password: '',
+			timezone: Intl.DateTimeFormat().resolvedOptions().timeZone ?? 'UTC',
 		},
 		resolver: zodResolver(signUpValidations),
 	});

@@ -6,10 +6,15 @@ import { signIn } from '@/lib/auth';
 import { unAuthAction } from '@/lib/safe-action';
 import { checkIfUserExistsByEmail } from '@/use-cases/check-if-user-exists';
 import { createUser } from '@/use-cases/create-user';
+import { verifyTimezone } from '@/use-cases/verify-timezone';
 
 export const signUpAction = unAuthAction
 	.schema(signUpValidations)
 	.action(async ({ parsedInput: values }) => {
+		if (values.timezone !== 'UTC' && !verifyTimezone(values.timezone ?? '')) {
+			throw new CustomError('Invalid timezone.');
+		}
+
 		const userExists = await checkIfUserExistsByEmail(values.email);
 
 		if (userExists) {
@@ -20,6 +25,7 @@ export const signUpAction = unAuthAction
 			email: values.email,
 			password: values.password,
 			name: values.name,
+			timezone: values.timezone,
 		});
 
 		if (!user) {

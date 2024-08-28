@@ -9,6 +9,7 @@ export const signUpValidations = z.object({
 	password: z
 		.string()
 		.min(8, { message: 'Password must be at least 8 characters' }),
+	timezone: z.string().optional(),
 });
 
 export type SignUpFormValues = z.infer<typeof signUpValidations>;
