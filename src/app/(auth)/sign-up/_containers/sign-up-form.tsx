@@ -9,6 +9,7 @@ import { FormInput } from '@/components/form/form-input';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
+import { wait } from '@/helpers/wait';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -28,7 +29,7 @@ export const SignUpForm = () => {
 			className='grid flex-1 gap-8 rounded-[0.75rem] bg-theme-white p-5 md:max-w-[35rem] md:p-8'
 			form={form}
 			onSubmit={async (data) => {
-				await new Promise((resolve) => setTimeout(() => resolve(data), 1000));
+				await wait(1000, data);
 			}}
 		>
 			<h1 className='fz-preset-1 text-theme-gray-900'>Sign Up</h1>
