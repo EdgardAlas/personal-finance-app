@@ -15,22 +15,13 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
 export const SignUpForm = () => {
-	const form = useForm<SignUpFormValues>({
-		defaultValues: {
-			name: '',
-			email: '',
-			password: '',
-		},
-		resolver: zodResolver(signUpValidations),
-	});
+	const { form, onSubmit } = useSignUpForm();
 
 	return (
 		<FormContext
 			className='grid flex-1 gap-8 rounded-[0.75rem] bg-theme-white p-5 md:max-w-[35rem] md:p-8'
 			form={form}
-			onSubmit={async (data) => {
-				await wait(1000, data);
-			}}
+			onSubmit={onSubmit}
 		>
 			<h1 className='fz-preset-1 text-theme-gray-900'>Sign Up</h1>
 			<section className='grid gap-4'>
@@ -52,4 +43,21 @@ export const SignUpForm = () => {
 			</p>
 		</FormContext>
 	);
+};
+
+const useSignUpForm = () => {
+	const form = useForm<SignUpFormValues>({
+		defaultValues: {
+			name: '',
+			email: '',
+			password: '',
+		},
+		resolver: zodResolver(signUpValidations),
+	});
+
+	const onSubmit = async (data: SignUpFormValues) => {
+		await wait(1000, data);
+	};
+
+	return { form, onSubmit };
 };

@@ -15,21 +15,13 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
 export const LoginForm = () => {
-	const form = useForm<LoginFormValues>({
-		defaultValues: {
-			email: '',
-			password: '',
-		},
-		resolver: zodResolver(loginValidations),
-	});
+	const { form, onSubmit } = useLoginForm();
 
 	return (
 		<FormContext
 			className='grid flex-1 gap-8 rounded-[0.75rem] bg-theme-white p-5 md:max-w-[35rem] md:p-8'
 			form={form}
-			onSubmit={async (data) => {
-				await wait(1000, data);
-			}}
+			onSubmit={onSubmit}
 		>
 			<h1 className='fz-preset-1 text-theme-gray-900'>Login</h1>
 			<section className='grid gap-4'>
@@ -54,4 +46,20 @@ export const LoginForm = () => {
 			</p>
 		</FormContext>
 	);
+};
+
+const useLoginForm = () => {
+	const form = useForm<LoginFormValues>({
+		defaultValues: {
+			email: '',
+			password: '',
+		},
+		resolver: zodResolver(loginValidations),
+	});
+
+	const onSubmit = async (data: LoginFormValues) => {
+		await wait(1000, data);
+	};
+
+	return { form, onSubmit };
 };
