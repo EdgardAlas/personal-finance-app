@@ -13,7 +13,7 @@ import { useFormContext } from 'react-hook-form';
 type FormInputProps<T, E extends React.ElementType> = {
 	input: E;
 	name: T;
-	label?: string;
+	label?: string | React.ReactNode;
 	description?: string;
 	classNames?: Record<
 		'container' | 'label' | 'input' | 'description' | 'error',
@@ -40,9 +40,13 @@ export const FormInput = <T, E extends React.ElementType>({
 			name={name as string}
 			render={({ field, fieldState }) => (
 				<FormItem className={cn(classNames?.container)}>
-					<FormLabel className={cn('fz-preset-5-bold', classNames?.label)}>
-						{label}
-					</FormLabel>
+					{typeof label === 'string' ? (
+						<FormLabel className={cn('fz-preset-5-bold', classNames?.label)}>
+							{label}
+						</FormLabel>
+					) : (
+						label
+					)}
 					<FormControl>
 						<Component
 							{...field}

@@ -7,6 +7,7 @@ import {
 import { FormContext } from '@/components/form/form-context';
 import { FormInput } from '@/components/form/form-input';
 import { Button } from '@/components/ui/button';
+import { FormLabel } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
 import { wait } from '@/helpers/wait';
@@ -32,7 +33,21 @@ export const LoginForm = () => {
 					type='email'
 					autoFocus
 				/>
-				<FormInput input={PasswordInput} name='password' label='Password' />
+				<FormInput
+					input={PasswordInput}
+					name='password'
+					label={
+						<div className='fz-preset-5-bold flex items-center justify-between'>
+							<FormLabel>Password</FormLabel>
+							<Link
+								href='/forgot-password'
+								className='text-theme-gray-900 underline'
+							>
+								Forgot password?
+							</Link>
+						</div>
+					}
+				/>
 			</section>
 			<Button loading={form.formState.isSubmitting}>Login</Button>
 			<p className='text-center'>
