@@ -1,7 +1,7 @@
 import { loginValidations } from '@/app/(auth)/login/validations';
 import { authMiddleware } from '@/lib/auth-middleware';
 import { comparePassword } from '@/lib/bcrypt';
-import { checkIfUserExists } from '@/use-cases/check-if-user-exists';
+import { checkIfUserExistsByEmail } from '@/use-cases/check-if-user-exists';
 import NextAuth from 'next-auth';
 import credentials from 'next-auth/providers/credentials';
 
@@ -22,7 +22,7 @@ export const {
 			authorize: async (credentials) => {
 				const parsedValues = await loginValidations.parseAsync(credentials);
 
-				const userExists = await checkIfUserExists(parsedValues.email);
+				const userExists = await checkIfUserExistsByEmail(parsedValues.email);
 
 				if (!userExists) {
 					return null;
