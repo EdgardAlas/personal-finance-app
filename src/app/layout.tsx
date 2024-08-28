@@ -23,7 +23,11 @@ export default function RootLayout({
 		<html lang='en'>
 			<body className={cn(fontFamily.className, 'fz-preset-4 bg-background')}>
 				{children}
-				<Toaster />
+				<Toaster
+					toastOptions={{
+						className: 'bg-theme-white text-theme-gray-900',
+					}}
+				/>
 			</body>
 		</html>
 	);
