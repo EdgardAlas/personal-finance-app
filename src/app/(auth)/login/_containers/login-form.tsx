@@ -14,6 +14,7 @@ import { wait } from '@/helpers/wait';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 export const LoginForm = () => {
 	const { form, onSubmit } = useLoginForm();
@@ -69,7 +70,9 @@ const useLoginForm = () => {
 	});
 
 	const onSubmit = async (data: LoginFormValues) => {
+		const id = toast.loading('Logging in...');
 		await wait(1000, data);
+		toast.success('Welcome! You are now logged in.', { id });
 	};
 
 	return { form, onSubmit };

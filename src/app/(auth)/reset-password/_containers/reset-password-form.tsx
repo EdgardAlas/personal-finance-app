@@ -13,6 +13,7 @@ import { wait } from '@/helpers/wait';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 export const ResetPasswordForm = ({
 	email,
@@ -80,11 +81,14 @@ const useResetPasswordForm = ({
 	});
 
 	const onSubmit = async (data: ResetPasswordFormValues) => {
+		const id = toast.loading('Resetting password...');
+
 		await wait(1000, {
 			...data,
 			email,
 			token,
 		});
+		toast.success('Password reset!', { id });
 	};
 
 	return { form, onSubmit };
