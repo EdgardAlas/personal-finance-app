@@ -6,8 +6,8 @@ interface User {
 	name: string;
 	email: string;
 	timezone: string;
-	createAt: string | null;
-	updateAt: string | null;
+	createdAt: string | null;
+	updatedAt: string | null;
 }
 
 export const currentUser = async (): Promise<User | undefined> => {
@@ -31,7 +31,7 @@ export const currentUser = async (): Promise<User | undefined> => {
 		name: user.name,
 		email: user.email,
 		timezone: user.timezone,
-		createAt: user.createdAt,
-		updateAt: user.updatedAt,
+		createdAt: user.createdAt,
+		updatedAt: user.updatedAt,
 	} satisfies User;
 };
