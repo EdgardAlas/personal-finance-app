@@ -1,5 +1,4 @@
 import { ResetPasswordForm } from '@/app/(auth)/reset-password/_containers/reset-password-form';
-import React from 'react';
 
 export const metadata = {
 	title: 'Reset Password',

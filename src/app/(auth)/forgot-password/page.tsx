@@ -1,5 +1,4 @@
 import { ForgotPasswordForm } from '@/app/(auth)/forgot-password/_containers/forgot-password-form';
-import React from 'react';
 
 export const metadata = {
 	title: 'Forgot Password',
