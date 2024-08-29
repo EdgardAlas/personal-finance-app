@@ -9,6 +9,7 @@ const envSchema = z.object({
 	JWT_SECRET: z.string(),
 	RESEND_KEY: z.string(),
 	BASE_URL: z.string(),
+	ENCRYPTION_KEY: z.string(),
 });
 
 export const env = envSchema.parse(process.env);
