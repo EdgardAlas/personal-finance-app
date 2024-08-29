@@ -39,6 +39,7 @@ export const LoginForm = () => {
 							<Link
 								href='/forgot-password'
 								className='text-theme-gray-900 underline'
+								tabIndex={-1}
 							>
 								Forgot password?
 							</Link>
