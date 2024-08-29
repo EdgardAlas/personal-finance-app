@@ -9,11 +9,15 @@ export const handleSafeActionResponse = async ({
 	successMessage = 'Success',
 	errorMessage,
 	loadingMessage = 'Loading...',
+	onSuccess,
+	onError,
 }: {
 	action: Promise<SafeActionResult<TODO, TODO, TODO, TODO> | undefined>;
 	successMessage?: string;
 	errorMessage?: string;
 	loadingMessage?: string;
+	onSuccess?: (data: TODO) => void;
+	onError?: (data: TODO) => void;
 }) => {
 	if (!action) {
 		toast.error('An error occurred. Please try again later.');
@@ -30,10 +34,11 @@ export const handleSafeActionResponse = async ({
 			errorMessage,
 		})
 	) {
+		await onError?.(response);
 		return false;
 	}
 
 	toast.success(successMessage, { id });
-
+	await onSuccess?.(response?.data);
 	return true;
 };
