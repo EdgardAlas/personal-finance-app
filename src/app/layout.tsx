@@ -20,7 +20,10 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en'>
+		<html
+			lang='en'
+			className='scrollbar-track-gray-200 scrollbar-thumb-gray-700'
+		>
 			<body className={cn(fontFamily.className, 'fz-preset-4 bg-background')}>
 				{children}
 				<Toaster

@@ -71,9 +71,15 @@ importers:
       sonner:
         specifier: ^1.5.0
         version: 1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      stan-js:
+        specifier: ^1.5.0
+        version: 1.5.0(react@18.3.1)
       tailwind-merge:
         specifier: ^2.5.2
         version: 2.5.2
+      tailwind-scrollbar:
+        specifier: ^3.1.0
+        version: 3.1.0(tailwindcss@3.4.10)
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.10)
@@ -3204,6 +3210,17 @@ packages:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
 
+  stan-js@1.5.0:
+    resolution: {integrity: sha512-lKEil+zU0AQCmv/VpSS7eEYBXx72ogR6SxN1+tz6yYZjzRdEB1jTrwLL0GRJ84RpTul3oh4w8o5+zIN91TPABg==}
+    peerDependencies:
+      react: '>=18.2.0'
+      react-native-mmkv: '>=2.0.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-native-mmkv:
+        optional: true
+
   stop-iteration-iterator@1.0.0:
     resolution: {integrity: sha512-iCGQj+0l0HOdZ2AEeBADlsRC+vsnDsZsbdSiH1yNSjcfKM7fdpCMfqAL/dwF5BLiw/XhRft/Wax6zQbhq2BcjQ==}
     engines: {node: '>= 0.4'}
@@ -3300,6 +3317,12 @@ packages:
 
   tailwind-merge@2.5.2:
     resolution: {integrity: sha512-kjEBm+pvD+6eAwzJL2Bi+02/9LFLal1Gs61+QB7HvTfQQ0aXwC5LGT8PEt1gS0CWKktKe6ysPTAy3cBC5MeiIg==}
+
+  tailwind-scrollbar@3.1.0:
+    resolution: {integrity: sha512-pmrtDIZeHyu2idTejfV59SbaJyvp1VRjYxAjZBH0jnyrPRo6HL1kD5Glz8VPagasqr6oAx6M05+Tuw429Z8jxg==}
+    engines: {node: '>=12.13.0'}
+    peerDependencies:
+      tailwindcss: 3.x
 
   tailwindcss-animate@1.0.7:
     resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
@@ -6737,6 +6760,10 @@ snapshots:
 
   source-map@0.6.1: {}
 
+  stan-js@1.5.0(react@18.3.1):
+    optionalDependencies:
+      react: 18.3.1
+
   stop-iteration-iterator@1.0.0:
     dependencies:
       internal-slot: 1.0.7
@@ -6855,6 +6882,10 @@ snapshots:
       picocolors: 1.0.1
 
   tailwind-merge@2.5.2: {}
+
+  tailwind-scrollbar@3.1.0(tailwindcss@3.4.10):
+    dependencies:
+      tailwindcss: 3.4.10
 
   tailwindcss-animate@1.0.7(tailwindcss@3.4.10):
     dependencies:

@@ -33,7 +33,9 @@
 		"react-hook-form": "^7.53.0",
 		"resend": "^4.0.0",
 		"sonner": "^1.5.0",
+		"stan-js": "^1.5.0",
 		"tailwind-merge": "^2.5.2",
+		"tailwind-scrollbar": "^3.1.0",
 		"tailwindcss-animate": "^1.0.7",
 		"timezones-list": "^3.0.3",
 		"zod": "^3.23.8"
