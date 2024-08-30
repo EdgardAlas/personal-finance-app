@@ -44,7 +44,7 @@ export const DesktopSidebar = () => {
 						label='Minimize Menu'
 						icon={MinimizeMenu}
 						classNames={{
-							icon: cn(open && 'rotate-180'),
+							icon: cn(!open && 'rotate-180'),
 						}}
 						as={'button'}
 						onClick={() => setOpen(!open)}
