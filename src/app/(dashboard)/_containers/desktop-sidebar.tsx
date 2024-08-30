@@ -15,7 +15,7 @@ import { useSidebar } from '@/context/sidebar-context';
 import { ellipsis } from '@/helpers/ellipsis';
 import { LucideLogOut } from 'lucide-react';
 
-export const Sidebar = () => {
+export const DesktopSidebar = () => {
 	const { setOpen, open } = useSidebar();
 	const { user } = useAuth();
 
