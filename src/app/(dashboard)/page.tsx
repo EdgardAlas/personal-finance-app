@@ -1,4 +1,7 @@
-'use client';
+export const metadata = {
+	title: 'Overview',
+	description: 'Here you can see the overview of the platform',
+};
 
 const HomePage = () => {
 	return (
