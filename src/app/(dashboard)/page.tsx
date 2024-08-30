@@ -1,14 +1,10 @@
 'use client';
 
-import { DesktopSidebar } from './_containers/desktop-sidebar';
-
 const HomePage = () => {
 	return (
-		<main className='flex h-dvh items-start'>
-			<DesktopSidebar />
-
-			<div className='flex-1'>2</div>
-		</main>
+		<>
+			<h1 className='fz-preset-1 text-theme-gray-900'>Overview</h1>
+		</>
 	);
 };
 

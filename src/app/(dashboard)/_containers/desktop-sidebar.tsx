@@ -19,16 +19,14 @@ export const DesktopSidebar = () => {
 
 	return (
 		<>
-			{/* 24px */}
 			<aside
 				className={cn(
-					'sticky top-0 flex h-full flex-col gap-6 bg-theme-gray-900 text-theme-gray-300 max-lg:hidden lg:w-[300px]',
+					'sticky top-0 flex max-h-dvh flex-col gap-6 bg-theme-gray-900 text-theme-gray-300 max-lg:hidden lg:w-[300px]',
 					{
 						'!w-[88px]': !open,
 					}
 				)}
 			>
-				{/* 102px */}
 				<div className='h-[102px] px-8 py-10'>
 					{open ? <Logo aria-label='logo' /> : <LogoSmall aria-label='logo' />}
 				</div>
@@ -41,7 +39,6 @@ export const DesktopSidebar = () => {
 					))}
 				</ul>
 
-				{/* 158px */}
 				<div className='h-[158px]'>
 					<DesktopMenuItem
 						label='Minimize Menu'
