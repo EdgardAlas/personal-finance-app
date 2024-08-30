@@ -40,7 +40,7 @@ export const MobileSidebar = () => {
 				</Link>
 			))}
 
-			<Link href='/api/logout' className={className('-')}>
+			<Link href='/api/logout' className={className('-')} prefetch={false}>
 				<LucideLogOut className='fill-theme-gray-300' />
 				<span className='hidden md:block'>Logout</span>
 			</Link>

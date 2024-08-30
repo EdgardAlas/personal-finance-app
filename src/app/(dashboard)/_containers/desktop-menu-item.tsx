@@ -31,32 +31,47 @@ export const DesktopMenuItem = <T extends ElementType = typeof Link>({
 
 	const { open } = useSidebar();
 
+	const isActive = pathname === props.href;
+
 	return (
 		<Component
 			className={cn(
-				'fz-preset-3 flex h-14 w-[276px] items-center gap-4 rounded-r-[12px] border-s-4 text-theme-gray-300',
-				'border-transparent pr-8 ps-7 transition-colors duration-300',
-				'hover:text-theme-white [&_svg]:hover:fill-theme-white',
+				'fz-preset-3 flex h-14 w-[276px] items-center gap-4 rounded-r-[12px] text-theme-gray-300',
+				'pr-8 transition-colors duration-300',
+				'duration-300 hover:text-theme-white [&_svg]:hover:fill-theme-white',
 				{
-					'border-theme-green bg-theme-white !text-theme-gray-900':
-						pathname === props.href,
-					'!w-[88px] rounded-none': !open,
+					'bg-theme-white !text-theme-gray-900': isActive,
 				},
 				classNames?.container
 			)}
 			{...(props as TODO)}
 		>
-			<Icon
-				aria-label={label}
-				className={cn(
-					'fill-theme-gray-300 transition-colors duration-300',
-					{
-						'!fill-theme-green': pathname === props.href,
-					},
-					classNames?.icon
-				)}
-			/>
-			{open && <span className={classNames?.label}>{label}</span>}
+			<div
+				className={cn('relative z-20 border-s-4 border-transparent ps-7', {
+					'flex h-full items-center border-theme-green bg-theme-white':
+						isActive,
+					'bg-theme-gray-900': !isActive,
+				})}
+			>
+				<Icon
+					aria-label={label}
+					className={cn(
+						'fill-theme-gray-300 transition-colors duration-300',
+						{
+							'!fill-theme-green': isActive,
+						},
+						classNames?.icon
+					)}
+				/>
+			</div>
+
+			<span
+				className={cn('transition-opacity duration-300', {
+					'opacity-0': !open,
+				})}
+			>
+				{label}
+			</span>
 		</Component>
 	);
 };

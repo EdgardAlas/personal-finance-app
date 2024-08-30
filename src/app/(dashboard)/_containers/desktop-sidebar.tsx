@@ -1,12 +1,9 @@
 'use client';
 
 import Logo from '@/assets/images/logo-large.svg';
-
 import { menuItems } from '@/config/menu-items';
 import { cn } from '@/lib/cn';
-
 import MinimizeMenu from '@/assets/images/icon-minimize-menu.svg';
-import LogoSmall from '@/assets/images/logo-small.svg';
 import { useAuth } from '@/context/auth-context';
 import { useSidebar } from '@/context/sidebar-context';
 import { ellipsis } from '@/helpers/ellipsis';
@@ -21,17 +18,22 @@ export const DesktopSidebar = () => {
 		<>
 			<aside
 				className={cn(
-					'sticky top-0 flex max-h-dvh flex-col gap-6 bg-theme-gray-900 text-theme-gray-300 max-lg:hidden lg:w-[300px]',
+					'sticky top-0 flex max-h-dvh flex-col gap-6 bg-theme-gray-900 text-theme-gray-300 transition-[width] duration-300 max-lg:hidden lg:w-[300px]',
 					{
-						'!w-[88px]': !open,
+						'!w-[80px]': !open,
 					}
 				)}
 			>
 				<div className='h-[102px] px-8 py-10'>
-					{open ? <Logo aria-label='logo' /> : <LogoSmall aria-label='logo' />}
+					<Logo
+						aria-label={'Finance logo'}
+						className={cn('transition-[width] duration-300', {
+							'w-[14px]': !open,
+						})}
+					/>
 				</div>
 
-				<ul className='scrollbar-thin h-[calc(100dvh-102px-158px)] overflow-auto'>
+				<ul className='h-[calc(100dvh-102px-158px)] overflow-y-auto overflow-x-hidden scrollbar-thin'>
 					{menuItems.map((item) => (
 						<li key={item.label}>
 							<DesktopMenuItem {...item} />
@@ -51,6 +53,7 @@ export const DesktopSidebar = () => {
 					/>
 
 					<DesktopMenuItem
+						prefetch={false}
 						label={`Logout ( ${ellipsis(user?.name ?? '', 10)} )`}
 						icon={LucideLogOut}
 						href={'/api/logout'}
