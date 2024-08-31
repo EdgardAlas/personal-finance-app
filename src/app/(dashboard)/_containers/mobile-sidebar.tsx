@@ -32,6 +32,7 @@ export const MobileSidebar = () => {
 								pathname === item.href,
 						}
 					)}
+					prefetch={item.prefetch}
 				>
 					<item.icon
 						className={cn(
