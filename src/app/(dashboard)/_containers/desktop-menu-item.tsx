@@ -36,34 +36,27 @@ export const DesktopMenuItem = <T extends ElementType = typeof Link>({
 	return (
 		<Component
 			className={cn(
+				'border-s-4 border-transparent ps-7',
 				'fz-preset-3 flex h-14 w-[17.25rem] items-center gap-4 rounded-r-[0.75rem] text-theme-gray-300',
 				'pr-8 transition-colors duration-300',
 				'duration-300 hover:text-theme-white [&_svg]:hover:fill-theme-white',
 				{
-					'bg-theme-white !text-theme-gray-900': isActive,
+					'border-theme-green bg-theme-white !text-theme-gray-900': isActive,
 				},
 				classNames?.container
 			)}
 			{...(props as TODO)}
 		>
-			<div
-				className={cn('relative z-20 border-s-4 border-transparent ps-7', {
-					'flex h-full items-center border-theme-green bg-theme-white':
-						isActive,
-					'bg-theme-gray-900': !isActive,
-				})}
-			>
-				<Icon
-					aria-label={label}
-					className={cn(
-						'fill-theme-gray-300 transition-colors duration-300',
-						{
-							'!fill-theme-green': isActive,
-						},
-						classNames?.icon
-					)}
-				/>
-			</div>
+			<Icon
+				aria-label={label}
+				className={cn(
+					'fill-theme-gray-300 transition-colors duration-300',
+					{
+						'!fill-theme-green': isActive,
+					},
+					classNames?.icon
+				)}
+			/>
 
 			<span
 				className={cn('transition-opacity duration-300', {
