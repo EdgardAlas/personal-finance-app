@@ -27,6 +27,7 @@ export default function RootLayout({
 			<body className={cn(fontFamily.className, 'fz-preset-4 bg-background')}>
 				{children}
 				<Toaster
+					position='top-right'
 					toastOptions={{
 						className: 'bg-theme-white text-theme-gray-900',
 					}}
