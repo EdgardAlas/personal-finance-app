@@ -36,7 +36,7 @@ export const DesktopMenuItem = <T extends ElementType = typeof Link>({
 	return (
 		<Component
 			className={cn(
-				'fz-preset-3 flex h-14 w-[276px] items-center gap-4 rounded-r-[12px] text-theme-gray-300',
+				'fz-preset-3 flex h-14 w-[17.25rem] items-center gap-4 rounded-r-[0.75rem] text-theme-gray-300',
 				'pr-8 transition-colors duration-300',
 				'duration-300 hover:text-theme-white [&_svg]:hover:fill-theme-white',
 				{
