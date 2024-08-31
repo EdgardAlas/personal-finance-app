@@ -18,6 +18,7 @@ export const MobileSidebar = () => {
 					label: 'Logout',
 					href: '/logout',
 					icon: LucideLogOut,
+					prefetch: false,
 				},
 			].map((item) => (
 				<Link

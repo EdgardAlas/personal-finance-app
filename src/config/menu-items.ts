@@ -9,6 +9,7 @@ export const menuItems: {
 	label: string;
 	icon: FC<SVGProps<SVGElement>>;
 	href: string;
+	prefetch?: boolean;
 }[] = [
 	{
 		label: 'Overview',
