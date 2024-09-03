@@ -1,6 +1,6 @@
 import { BalanceCards } from '@/app/(dashboard)/(home)/balance-cards';
-import { Card } from '@/components/ui/card';
 import { PageTitle } from '@/components/ui/page-title';
+import { VanillaCard } from '@/components/ui/vanilla-card';
 
 export const metadata = {
 	title: 'Overview',
@@ -15,14 +15,14 @@ const HomePage = async () => {
 
 			<div className='grid gap-6 lg:grid-cols-12'>
 				<div className='grid gap-4 md:gap-6 lg:col-span-7'>
-					<Card
+					<VanillaCard
 						title='Pots'
 						link={{
 							href: '/pots',
 						}}
 					/>
 
-					<Card
+					<VanillaCard
 						title='Transactions'
 						link={{
 							href: '/transactions',
@@ -31,13 +31,13 @@ const HomePage = async () => {
 				</div>
 
 				<div className='grid gap-4 md:gap-6 lg:col-span-5'>
-					<Card
+					<VanillaCard
 						title='Budgets'
 						link={{
 							href: '/budgets',
 						}}
 					/>
-					<Card
+					<VanillaCard
 						title='Recurring Bills'
 						link={{
 							href: '/recurring-bills',
