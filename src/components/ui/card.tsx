@@ -7,7 +7,7 @@ interface CardProps extends ComponentProps<'div'> {
 	title?: string;
 	link?: {
 		href: string;
-		label: string;
+		label?: string;
 	};
 }
 
@@ -29,7 +29,11 @@ export const Card = ({
 			{!link && !title ? null : (
 				<div className='flex items-center justify-between'>
 					{title && <CardTitle>{title}</CardTitle>}
-					{link && <CardTitleLink href={link.href}>{link.label}</CardTitleLink>}
+					{link && (
+						<CardTitleLink href={link.href}>
+							{link.label ?? 'See Details'}
+						</CardTitleLink>
+					)}
 				</div>
 			)}
 			{children}

@@ -15,7 +15,7 @@ const DasboardLayout = async ({ children }: { children: React.ReactNode }) => {
 			<main className='relative flex min-h-dvh'>
 				<DesktopSidebar />
 
-				<div className='flex flex-1 flex-col gap-8 bg-background px-4 py-6 md:px-10 md:py-8 xl:px-10 xl:py-8'>
+				<div className='flex flex-1 flex-col gap-8 bg-background px-4 py-6 pb-20 md:px-10 md:py-8 xl:px-10 xl:py-8'>
 					{children}
 				</div>
 
