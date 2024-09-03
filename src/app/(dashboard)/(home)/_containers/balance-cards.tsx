@@ -1,4 +1,4 @@
-import { BalanceCard } from '@/app/(dashboard)/(home)/balance-card';
+import { BalanceCard } from '@/app/(dashboard)/(home)/_containers/balance-card';
 import React from 'react';
 
 export const BalanceCards = () => {

@@ -1,7 +1,7 @@
 import Arrow from '@/assets/images/icon-caret-right.svg';
 import { cn } from '@/lib/cn';
 import Link from 'next/link';
-import { ComponentProps } from 'react';
+import { ComponentProps, ReactNode } from 'react';
 
 interface CardProps extends ComponentProps<'div'> {
 	title?: string;
@@ -65,5 +65,19 @@ export const CardTitleLink = ({
 		>
 			{children} <Arrow />
 		</Link>
+	);
+};
+
+export const CardNotes = ({ notes }: { notes: string[] | ReactNode[] }) => {
+	if (!notes.length) return null;
+
+	return (
+		<ul className='fz-preset-5 list-disc ps-4'>
+			{notes.map((note, index) => (
+				<li key={index}>
+					<small>{note}</small>
+				</li>
+			))}
+		</ul>
 	);
 };
