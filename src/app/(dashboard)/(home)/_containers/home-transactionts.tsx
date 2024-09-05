@@ -1,8 +1,7 @@
-import EmmaRicharson from '@/assets/images/avatars/emma-richardson.jpg';
+import { TransactionAmout } from '@/components/ui/transaction-amout';
+import { TransactionRecipientSender } from '@/components/ui/transaction-recipient-sender';
 import { CardNotes, VanillaCard } from '@/components/ui/vanilla-card';
-import { currencyFormat } from '@/helpers/currency-format';
 import { cn } from '@/lib/cn';
-import Image from 'next/image';
 
 /* export const metadata = {
 	title: 'Overview',
@@ -14,7 +13,7 @@ const transactions = [
 		name: 'Emma Richardson',
 		amount: 100,
 		date: '19 Aug 2021',
-		icon: EmmaRicharson,
+		icon: '/emma-richardson.jpg',
 	},
 	{
 		name: 'Savory Bites Bistro',
@@ -56,24 +55,12 @@ export const HomeTransactionts = () => {
 							'pb-5': index === 0,
 						})}
 					>
-						<div className='inline-flex items-center gap-4'>
-							<Image
-								src={transaction.icon ?? EmmaRicharson}
-								alt=''
-								width={40}
-								height={40}
-								className='rounded-full object-cover'
-							/>
-							<p className='fz-preset-4-bold'>{transaction.name}</p>
-						</div>
+						<TransactionRecipientSender
+							icon={transaction.icon ?? ''}
+							name={transaction.name}
+						/>
 						<div className='inline-flex flex-col items-end gap-2'>
-							<p
-								className={cn('fz-preset-4-bold', {
-									'text-theme-green': transaction.amount > 0,
-								})}
-							>
-								{currencyFormat(transaction.amount)}
-							</p>
+							<TransactionAmout amount={transaction.amount} />
 							<p className='fz-preset-5'>{transaction.date}</p>
 						</div>
 					</div>
