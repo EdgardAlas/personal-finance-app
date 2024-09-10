@@ -61,6 +61,13 @@ const DesktopSidebarFooter = () => {
 	const { setOpen, open } = useSidebar();
 	const { user } = useAuth();
 
+	const sidebarToggle = () => {
+		const newSidebarState = !open;
+		setOpen(newSidebarState);
+		const sidebarState = newSidebarState ? 'open' : 'close';
+		document.cookie = `sidebar=${sidebarState}; path=/;`;
+	};
+
 	return (
 		<div className='h-[9.875rem]'>
 			<DesktopMenuItem
@@ -70,7 +77,7 @@ const DesktopSidebarFooter = () => {
 					icon: cn(!open && 'rotate-180'),
 				}}
 				as={'button'}
-				onClick={() => setOpen(!open)}
+				onClick={sidebarToggle}
 			/>
 
 			<DesktopMenuItem

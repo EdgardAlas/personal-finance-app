@@ -1,7 +1,8 @@
 'use client';
 
-import { createStore } from 'stan-js';
+import { createScopedStore } from 'stan-js';
 
-export const { useStore: useSidebar } = createStore({
-	open: true,
-});
+export const { useStore: useSidebar, StoreProvider: SidebarProvider } =
+	createScopedStore({
+		open: true,
+	});

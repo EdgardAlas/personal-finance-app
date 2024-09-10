@@ -18,7 +18,10 @@ export const HomePots = () => {
 					<div>
 						<p className='fz-preset-4 text-theme-gray-500'>Total Saved</p>
 						<p className='fz-preset-1 text-theme-gray-900'>
-							{currencyFormat(850)}
+							{currencyFormat(850, undefined, {
+								notation: 'compact',
+								maximumFractionDigits: 2,
+							})}
 						</p>
 					</div>
 				</div>

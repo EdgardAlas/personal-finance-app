@@ -1,3 +1,4 @@
+import { currencyFormat } from '@/helpers/currency-format';
 import { cn } from '@/lib/cn';
 import { ComponentProps } from 'react';
 
@@ -14,11 +15,6 @@ export const BalanceCard = ({
 	variant = 'white',
 	...rest
 }: BalanceCardProps) => {
-	const currency = new Intl.NumberFormat('en-US', {
-		style: 'currency',
-		currency: 'USD',
-	});
-
 	const isWhite = variant === 'white';
 	const isBlack = variant === 'black';
 
@@ -44,7 +40,7 @@ export const BalanceCard = ({
 					'text-theme-gray-900': isWhite,
 				})}
 			>
-				{currency.format(money)}
+				{currencyFormat(money)}
 			</p>
 		</div>
 	);
