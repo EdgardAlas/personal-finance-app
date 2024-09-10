@@ -1,15 +1,15 @@
 import {
-	pgTable,
-	index,
+	date,
 	foreignKey,
-	uuid,
-	varchar,
+	index,
 	numeric,
+	pgEnum,
+	pgTable,
+	text,
 	timestamp,
 	unique,
-	text,
-	date,
-	pgEnum,
+	uuid,
+	varchar,
 } from 'drizzle-orm/pg-core';
 
 import {
@@ -21,114 +21,19 @@ import {
 
 // tables
 
+export const budgetStatus = pgEnum('budget_status', ['active', 'inactive']);
 export const categoryType = pgEnum('category_type', ['income', 'expense']);
-
-export const pots = pgTable(
-	'pots',
-	{
-		id: uuid('id').defaultRandom().primaryKey().notNull(),
-		userId: uuid('user_id'),
-		name: varchar('name', { length: 100 }).notNull(),
-		amount: numeric('amount', { precision: 15, scale: 2 })
-			.default('0.00')
-			.notNull(),
-		createdAt: timestamp('created_at', {
-			withTimezone: true,
-			mode: 'string',
-		}).default(sql`CURRENT_TIMESTAMP`),
-		updatedAt: timestamp('updated_at', {
-			withTimezone: true,
-			mode: 'string',
-		}).default(sql`CURRENT_TIMESTAMP`),
-	},
-	(table) => {
-		return {
-			userIdIdx: index('pots_user_id_idx').using(
-				'btree',
-				table.userId.asc().nullsLast()
-			),
-			potsUserIdFkey: foreignKey({
-				columns: [table.userId],
-				foreignColumns: [users.id],
-				name: 'pots_user_id_fkey',
-			})
-				.onUpdate('cascade')
-				.onDelete('cascade'),
-		};
-	}
-);
-
-export const users = pgTable(
-	'users',
-	{
-		id: uuid('id').defaultRandom().primaryKey().notNull(),
-		email: varchar('email', { length: 255 }).notNull(),
-		password: text('password').notNull(),
-		name: varchar('name', { length: 100 }).notNull(),
-		timezone: varchar('timezone', { length: 50 }).default('UTC').notNull(),
-		currency: varchar('currency', { length: 3 }).default('USD').notNull(),
-		resetPasswordToken: text('reset_password_token'),
-		createdAt: timestamp('created_at', {
-			withTimezone: true,
-			mode: 'string',
-		}).default(sql`CURRENT_TIMESTAMP`),
-		updatedAt: timestamp('updated_at', {
-			withTimezone: true,
-			mode: 'string',
-		}).default(sql`CURRENT_TIMESTAMP`),
-	},
-	(table) => {
-		return {
-			emailIdx: index('users_email_idx').using(
-				'btree',
-				table.email.asc().nullsLast()
-			),
-			usersEmailKey: unique('users_email_key').on(table.email),
-		};
-	}
-);
-
-export const categories = pgTable(
-	'categories',
-	{
-		id: uuid('id').defaultRandom().primaryKey().notNull(),
-		userId: uuid('user_id'),
-		name: varchar('name', { length: 100 }).notNull(),
-		type: categoryType('type').notNull(),
-		createdAt: timestamp('created_at', {
-			withTimezone: true,
-			mode: 'string',
-		}).default(sql`CURRENT_TIMESTAMP`),
-		updatedAt: timestamp('updated_at', {
-			withTimezone: true,
-			mode: 'string',
-		}).default(sql`CURRENT_TIMESTAMP`),
-	},
-	(table) => {
-		return {
-			userIdIdx: index('categories_user_id_idx').using(
-				'btree',
-				table.userId.asc().nullsLast()
-			),
-			categoriesUserIdFkey: foreignKey({
-				columns: [table.userId],
-				foreignColumns: [users.id],
-				name: 'categories_user_id_fkey',
-			})
-				.onUpdate('cascade')
-				.onDelete('cascade'),
-		};
-	}
-);
 
 export const budgets = pgTable(
 	'budgets',
 	{
 		id: uuid('id').defaultRandom().primaryKey().notNull(),
 		userId: uuid('user_id'),
+		categoryId: uuid('category_id'),
 		amount: numeric('amount', { precision: 15, scale: 2 }).notNull(),
-		startDate: date('start_date').notNull(),
-		endDate: date('end_date').notNull(),
+		spent: numeric('spent', { precision: 15, scale: 2 }).default('0').notNull(),
+		color: varchar('color', { length: 7 }).default('#F2CDAC').notNull(),
+		status: budgetStatus('status').default('active').notNull(),
 		createdAt: timestamp('created_at', {
 			withTimezone: true,
 			mode: 'string',
@@ -151,6 +56,13 @@ export const budgets = pgTable(
 			})
 				.onUpdate('cascade')
 				.onDelete('cascade'),
+			budgetsCategoryIdFkey: foreignKey({
+				columns: [table.categoryId],
+				foreignColumns: [categories.id],
+				name: 'budgets_category_id_fkey',
+			})
+				.onUpdate('cascade')
+				.onDelete('set null'),
 		};
 	}
 );
@@ -225,37 +137,135 @@ export const transactions = pgTable(
 	}
 );
 
+export const users = pgTable(
+	'users',
+	{
+		id: uuid('id').defaultRandom().primaryKey().notNull(),
+		email: varchar('email', { length: 255 }).notNull(),
+		password: text('password').notNull(),
+		name: varchar('name', { length: 100 }).notNull(),
+		timezone: varchar('timezone', { length: 50 }).default('UTC').notNull(),
+		currency: varchar('currency', { length: 3 }).default('USD').notNull(),
+		resetPasswordToken: text('reset_password_token'),
+		createdAt: timestamp('created_at', {
+			withTimezone: true,
+			mode: 'string',
+		}).default(sql`CURRENT_TIMESTAMP`),
+		updatedAt: timestamp('updated_at', {
+			withTimezone: true,
+			mode: 'string',
+		}).default(sql`CURRENT_TIMESTAMP`),
+	},
+	(table) => {
+		return {
+			emailIdx: index('users_email_idx').using(
+				'btree',
+				table.email.asc().nullsLast()
+			),
+			usersEmailKey: unique('users_email_key').on(table.email),
+		};
+	}
+);
+
+export const categories = pgTable(
+	'categories',
+	{
+		id: uuid('id').defaultRandom().primaryKey().notNull(),
+		userId: uuid('user_id'),
+		name: varchar('name', { length: 100 }).notNull(),
+		url: varchar('url', { length: 255 }),
+		type: categoryType('type').notNull(),
+		createdAt: timestamp('created_at', {
+			withTimezone: true,
+			mode: 'string',
+		}).default(sql`CURRENT_TIMESTAMP`),
+		updatedAt: timestamp('updated_at', {
+			withTimezone: true,
+			mode: 'string',
+		}).default(sql`CURRENT_TIMESTAMP`),
+	},
+	(table) => {
+		return {
+			userIdIdx: index('categories_user_id_idx').using(
+				'btree',
+				table.userId.asc().nullsLast()
+			),
+			categoriesUserIdFkey: foreignKey({
+				columns: [table.userId],
+				foreignColumns: [users.id],
+				name: 'categories_user_id_fkey',
+			})
+				.onUpdate('cascade')
+				.onDelete('cascade'),
+		};
+	}
+);
+
+export const pots = pgTable(
+	'pots',
+	{
+		id: uuid('id').defaultRandom().primaryKey().notNull(),
+		userId: uuid('user_id'),
+		name: varchar('name', { length: 100 }).notNull(),
+		color: varchar('color', { length: 7 }).default('#F2CDAC').notNull(),
+		target: numeric('target', { precision: 15, scale: 2 }).notNull(),
+		amount: numeric('amount', { precision: 15, scale: 2 })
+			.default('0')
+			.notNull(),
+		createdAt: timestamp('created_at', {
+			withTimezone: true,
+			mode: 'string',
+		}).default(sql`CURRENT_TIMESTAMP`),
+		updatedAt: timestamp('updated_at', {
+			withTimezone: true,
+			mode: 'string',
+		}).default(sql`CURRENT_TIMESTAMP`),
+	},
+	(table) => {
+		return {
+			userIdIdx: index('pots_user_id_idx').using(
+				'btree',
+				table.userId.asc().nullsLast()
+			),
+			potsUserIdFkey: foreignKey({
+				columns: [table.userId],
+				foreignColumns: [users.id],
+				name: 'pots_user_id_fkey',
+			})
+				.onUpdate('cascade')
+				.onDelete('cascade'),
+		};
+	}
+);
+
 // relations
-
-export const potsRelations = relations(pots, ({ one, many }) => ({
-	user: one(users, {
-		fields: [pots.userId],
-		references: [users.id],
-	}),
-	transactions: many(transactions),
-}));
-
-export const usersRelations = relations(users, ({ many }) => ({
-	pots: many(pots),
-	categories: many(categories),
-	budgets: many(budgets),
-	transactions: many(transactions),
-}));
-
-export const categoriesRelations = relations(categories, ({ one, many }) => ({
-	user: one(users, {
-		fields: [categories.userId],
-		references: [users.id],
-	}),
-	transactions: many(transactions),
-}));
 
 export const budgetsRelations = relations(budgets, ({ one, many }) => ({
 	user: one(users, {
 		fields: [budgets.userId],
 		references: [users.id],
 	}),
+	category: one(categories, {
+		fields: [budgets.categoryId],
+		references: [categories.id],
+	}),
 	transactions: many(transactions),
+}));
+
+export const usersRelations = relations(users, ({ many }) => ({
+	budgets: many(budgets),
+	transactions: many(transactions),
+	categories: many(categories),
+	pots: many(pots),
+}));
+
+export const categoriesRelations = relations(categories, ({ one, many }) => ({
+	budgets: many(budgets),
+	transactions: many(transactions),
+	user: one(users, {
+		fields: [categories.userId],
+		references: [users.id],
+	}),
 }));
 
 export const transactionsRelations = relations(transactions, ({ one }) => ({
@@ -274,6 +284,14 @@ export const transactionsRelations = relations(transactions, ({ one }) => ({
 	budget: one(budgets, {
 		fields: [transactions.budgetId],
 		references: [budgets.id],
+	}),
+}));
+
+export const potsRelations = relations(pots, ({ one, many }) => ({
+	transactions: many(transactions),
+	user: one(users, {
+		fields: [pots.userId],
+		references: [users.id],
 	}),
 }));
 
