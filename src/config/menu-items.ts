@@ -1,7 +1,7 @@
 import BudgetsIcon from '@/assets/images/icon-nav-budgets.svg';
 import HomeIcon from '@/assets/images/icon-nav-overview.svg';
 import PotsIcon from '@/assets/images/icon-nav-pots.svg';
-import RecurringBillsIcon from '@/assets/images/icon-nav-recurring-bills.svg';
+/* import RecurringBillsIcon from '@/assets/images/icon-nav-recurring-bills.svg'; */
 import TransactionIcon from '@/assets/images/icon-nav-transactions.svg';
 import { FC, SVGProps } from 'react';
 
@@ -31,9 +31,9 @@ export const menuItems: {
 		icon: PotsIcon,
 		href: '/pots',
 	},
-	{
+	/* {
 		label: 'Recurring Bills',
 		icon: RecurringBillsIcon,
 		href: '/recurring-bills',
-	},
+	}, */
 ];
