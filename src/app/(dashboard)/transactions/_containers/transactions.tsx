@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/table';
 import { TransactionAmout } from '@/components/ui/transaction-amout';
 import { TransactionRecipientSender } from '@/components/ui/transaction-recipient-sender';
+
 export const Transactions = () => {
 	return (
 		<Table>
