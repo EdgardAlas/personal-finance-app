@@ -6,6 +6,7 @@ import { signIn } from '@/lib/auth';
 import { unAuthAction } from '@/lib/safe-action';
 import { checkIfUserExistsByEmail } from '@/use-cases/check-if-user-exists';
 import { createUser } from '@/use-cases/create-user';
+import { insertDefaultCategories } from '@/use-cases/insert-default-categories';
 import { verifyTimezone } from '@/use-cases/verify-timezone';
 
 export const signUpAction = unAuthAction
@@ -31,6 +32,8 @@ export const signUpAction = unAuthAction
 		if (!user) {
 			throw new CustomError('An error occurred. Please try again later.');
 		}
+
+		await insertDefaultCategories(user[0].id);
 
 		await signIn('credentials', {
 			redirect: true,
