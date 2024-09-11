@@ -1,5 +1,6 @@
 import { auth } from '@/lib/auth';
 import { checkIfUserExistsById } from '@/use-cases/check-if-user-exists';
+import { redirect } from 'next/navigation';
 
 interface User {
 	id: string;
@@ -23,7 +24,7 @@ export const currentUser = async (): Promise<User | undefined> => {
 	const user = await checkIfUserExistsById(session.user.id as string);
 
 	if (!user) {
-		return undefined;
+		return redirect('/logout');
 	}
 
 	return {
