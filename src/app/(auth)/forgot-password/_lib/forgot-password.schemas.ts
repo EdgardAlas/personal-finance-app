@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const forgotPasswordValidations = z.object({
+export const forgotPasswordSchema = z.object({
 	email: z
 		.string()
 		.email({
@@ -9,6 +9,4 @@ export const forgotPasswordValidations = z.object({
 		.min(1, { message: 'Email is required' }),
 });
 
-export type ForgotPasswordFormValues = z.infer<
-	typeof forgotPasswordValidations
->;
+export type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>;

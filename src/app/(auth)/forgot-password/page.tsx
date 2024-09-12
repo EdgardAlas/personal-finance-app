@@ -1,4 +1,4 @@
-import { ForgotPasswordForm } from '@/app/(auth)/forgot-password/_containers/forgot-password-form';
+import { ForgotPasswordForm } from './_containers/forgot-password-form';
 
 export const metadata = {
 	title: 'Forgot Password',

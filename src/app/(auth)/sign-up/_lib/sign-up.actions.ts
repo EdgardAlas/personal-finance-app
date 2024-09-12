@@ -1,6 +1,6 @@
 'use server';
 
-import { signUpValidations } from '@/app/(auth)/sign-up/validations';
+import { signUpSchema } from './sign-up.schemas';
 import { CustomError } from '@/helpers/custom-error';
 import { signIn } from '@/lib/auth';
 import { unAuthAction } from '@/lib/safe-action';
@@ -10,7 +10,7 @@ import { insertDefaultCategories } from '@/use-cases/insert-default-categories';
 import { verifyTimezone } from '@/use-cases/verify-timezone';
 
 export const signUpAction = unAuthAction
-	.schema(signUpValidations)
+	.schema(signUpSchema)
 	.action(async ({ parsedInput: values }) => {
 		if (values.timezone !== 'UTC' && !verifyTimezone(values.timezone ?? '')) {
 			throw new CustomError('Invalid timezone.');

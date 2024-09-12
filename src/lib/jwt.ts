@@ -30,8 +30,7 @@ export const safeDecryptJWT = async <T>(token: string): Promise<T | null> => {
 		});
 
 		return payload as T;
-	} catch (error) {
-		console.error('Error decrypting JWT:', error);
+	} catch (_error) {
 		return null;
 	}
 };

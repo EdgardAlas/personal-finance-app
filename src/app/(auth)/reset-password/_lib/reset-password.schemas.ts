@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const resetPasswordValidations = z
+export const resetPasswordSchema = z
 	.object({
 		password: z
 			.string()
@@ -16,4 +16,4 @@ export const resetPasswordValidations = z
 		path: ['confirmPassword'],
 	});
 
-export type ResetPasswordFormValues = z.infer<typeof resetPasswordValidations>;
+export type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;

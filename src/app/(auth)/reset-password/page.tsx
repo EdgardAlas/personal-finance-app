@@ -1,4 +1,4 @@
-import { ResetPasswordForm } from '@/app/(auth)/reset-password/_containers/reset-password-form';
+import { ResetPasswordForm } from './_containers/reset-password-form';
 import { safeDecryptJWT } from '@/lib/jwt';
 import { redirect } from 'next/navigation';
 

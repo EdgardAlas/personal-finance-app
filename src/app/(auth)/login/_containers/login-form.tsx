@@ -1,10 +1,7 @@
 'use client';
 
-import { loginAction } from '@/app/(auth)/login/actions';
-import {
-	LoginFormValues,
-	loginValidations,
-} from '@/app/(auth)/login/validations';
+import { loginAction } from '../_lib/login.actions';
+import { LoginFormValues, loginSchema } from '../_lib/login.schemas';
 import { FormContext } from '@/components/form/form-context';
 import { FormInput } from '@/components/form/form-input';
 import { Button } from '@/components/ui/button';
@@ -12,8 +9,8 @@ import { FormLabel } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
 import { handleSafeActionResponse } from '@/lib/handle-safe-action-response';
-import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
 export const LoginForm = () => {
@@ -67,7 +64,7 @@ const useLoginForm = () => {
 			email: '',
 			password: '',
 		},
-		resolver: zodResolver(loginValidations),
+		resolver: zodResolver(loginSchema),
 	});
 
 	const onSubmit = async (data: LoginFormValues) => {

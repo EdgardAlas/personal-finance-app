@@ -1,6 +1,6 @@
 'use client';
 
-import { sendResetLink } from '@/app/(auth)/forgot-password/actions';
+import { sendResetLinkAction } from '../_lib/forgot-password.actions';
 import { FormContext } from '@/components/form/form-context';
 import { FormInput } from '@/components/form/form-input';
 import { Button } from '@/components/ui/button';
@@ -13,8 +13,8 @@ import { useForm } from 'react-hook-form';
 import { LinkSent } from '../_containers/link-sent';
 import {
 	ForgotPasswordFormValues,
-	forgotPasswordValidations,
-} from '../validations';
+	forgotPasswordSchema,
+} from '../_lib/forgot-password.schemas';
 
 export const ForgotPasswordForm = () => {
 	const { form, onSubmit, isLinkSent } = useForgotPasswordForm();
@@ -47,13 +47,13 @@ const useForgotPasswordForm = () => {
 		defaultValues: {
 			email: '',
 		},
-		resolver: zodResolver(forgotPasswordValidations),
+		resolver: zodResolver(forgotPasswordSchema),
 	});
 
 	const onSubmit = async (data: ForgotPasswordFormValues) => {
 		if (
 			await handleSafeActionResponse({
-				action: sendResetLink(data),
+				action: sendResetLinkAction(data),
 				loadingMessage: 'Sending reset link...',
 				successMessage: 'Reset link sent!',
 			})

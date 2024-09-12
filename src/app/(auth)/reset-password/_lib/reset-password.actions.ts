@@ -1,6 +1,6 @@
 'use server';
 
-import { resetPasswordValidations } from '@/app/(auth)/reset-password/validations';
+import { resetPasswordSchema } from './reset-password.schemas';
 import { CustomError } from '@/helpers/custom-error';
 import { hashPassword } from '@/lib/bcrypt';
 import { safeDecryptJWT } from '@/lib/jwt';
@@ -10,7 +10,7 @@ import { updateUserByEmail } from '@/use-cases/update-user';
 import { redirect } from 'next/navigation';
 
 export const resetPasswordAction = unAuthAction
-	.schema(resetPasswordValidations)
+	.schema(resetPasswordSchema)
 	.action(async ({ parsedInput: values }) => {
 		const { password, email, token } = values;
 

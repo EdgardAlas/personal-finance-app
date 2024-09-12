@@ -1,10 +1,7 @@
 'use client';
 
-import { signUpAction } from '@/app/(auth)/sign-up/actions';
-import {
-	SignUpFormValues,
-	signUpValidations,
-} from '@/app/(auth)/sign-up/validations';
+import { signUpAction } from '../_lib/sign-up.actions';
+import { SignUpFormValues, signUpSchema } from '../_lib/sign-up.schemas';
 import { FormContext } from '@/components/form/form-context';
 import { FormInput } from '@/components/form/form-input';
 import { Button } from '@/components/ui/button';
@@ -50,7 +47,7 @@ const useSignUpForm = () => {
 			password: '',
 			timezone: Intl.DateTimeFormat().resolvedOptions().timeZone ?? 'UTC',
 		},
-		resolver: zodResolver(signUpValidations),
+		resolver: zodResolver(signUpSchema),
 	});
 
 	const onSubmit = async (data: SignUpFormValues) => {

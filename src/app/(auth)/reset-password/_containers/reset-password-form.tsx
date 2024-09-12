@@ -1,10 +1,10 @@
 'use client';
 
-import { resetPasswordAction } from '@/app/(auth)/reset-password/actions';
+import { resetPasswordAction } from '../_lib/reset-password.actions';
 import {
 	ResetPasswordFormValues,
-	resetPasswordValidations,
-} from '@/app/(auth)/reset-password/validations';
+	resetPasswordSchema,
+} from '../_lib/reset-password.schemas';
 import { FormContext } from '@/components/form/form-context';
 import { FormInput } from '@/components/form/form-input';
 import { Button } from '@/components/ui/button';
@@ -79,7 +79,7 @@ const useResetPasswordForm = ({
 			email,
 			token,
 		},
-		resolver: zodResolver(resetPasswordValidations),
+		resolver: zodResolver(resetPasswordSchema),
 	});
 
 	const onSubmit = async (data: ResetPasswordFormValues) => {
